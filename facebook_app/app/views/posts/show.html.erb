@@ -1,0 +1,13 @@
+<h1>Post</h1>
+<div class="posts">
+  <%= @post.content %></br>
+  <%= @post.author.name %></br>
+</div>
+<h2>Comments</h2>
+<% if !@comments.empty? %>
+  <% @comments.each do |comment| %>
+  <%= comment.content %></br>
+  <%= link_to comment.author.name, comment.author  %></br></br>
+  <% end %>
+<% end %>
+<%= render 'comments/form' %>

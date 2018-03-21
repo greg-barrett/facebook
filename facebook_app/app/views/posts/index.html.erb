@@ -1,0 +1,12 @@
+<h1>Recent Posts</h1>
+<p>These are the posts you've written</p>
+
+<% @posts.each do |post| %>
+<div class="posts">
+<%= link_to "#{post.content}", user_post_path(post.author, post) %></br>
+<%= post.author.name  %></br>
+<%= post.created_at  %></br>
+</div>
+</br>
+
+<% end %>

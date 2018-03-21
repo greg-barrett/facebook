@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>FacebookApp</title>
+    <%= debug(params) if Rails.env.development? %>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +10,20 @@
   </head>
 
   <body>
+    <div class="topnav" id="myTopnav">
+      <% if signed_in? %>
+        <%= link_to "Home", current_user %>
+        <%= link_to "Write a Post", new_user_post_path(current_user) %>
+        <%= link_to "Recent Posts", user_posts_path(current_user) %>
+        <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+      <% else %>
+        <%= link_to "Sign in", new_user_session_url %>
+        <%= link_to "Sign up", new_user_registration_url %>
+      <% end %>
+    </div>
+
+    <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>
