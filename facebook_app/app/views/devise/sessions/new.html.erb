@@ -1,3 +1,6 @@
+<h1>Welcome to Fakebook!</h1>
+<p>If you already have an account you can log in below otherwise, <%= link_to "sign-up", new_user_registration_path %> to start connecting with your friends.</p>
+
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>

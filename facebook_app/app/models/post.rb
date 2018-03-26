@@ -7,4 +7,5 @@ class Post < ApplicationRecord
   #post.likes- number of likes
   has_many :likers, through: 'likes', source: 'user'
   #post.likers=users how liked it
+  default_scope -> { order(created_at: :desc) }
 end

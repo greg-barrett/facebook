@@ -12,11 +12,18 @@ class PostsController < ApplicationController
   def show
     @post=Post.find(params[:id])
     @comment=Comment.new
-    @comments=@post.comments  
+    @comments=@post.comments
+    @post_like=PostLike.new
+    @comment_like=CommentLike.new
+
   end
 
   def index
-    @posts=Post.all
+    friend_ids = "SELECT friendee_id FROM friendships
+                     WHERE  friender_id = :user_id"
+    @posts= Post.where("author_id IN (#{friend_ids})
+                     OR author_id = :user_id", user_id: current_user.id)
+
   end
 
   def destroy

@@ -1,7 +1,6 @@
-<p>What's on your mind?</p>
+
 
 <%= form_for(@post, url: user_posts_url(current_user)) do |f| %>
-  <%= f.label :content %></br>
-  <%= f.text_area :content %>
-<%= f.submit %>
+  <%= f.text_area :content, size: "60x6", placeholder: 'I...' %></br>
+<%= f.submit "Post" %>
 <% end %>

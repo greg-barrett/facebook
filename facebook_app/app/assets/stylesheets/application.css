@@ -13,11 +13,12 @@
  *= require_tree .
  *= require_self
  */
-.posts {
+.posts, .comments, .index {
   background-color: #5cdb95;
   border-style: solid;
   border-color: #379683;
   border-width: thin;
+  padding: 10px;
   }
 
 body {

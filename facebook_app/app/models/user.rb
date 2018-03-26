@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook]
   has_many :authored_posts, class_name: 'Post', foreign_key: 'author_id', :dependent => :destroy
   #posts they have written
   has_many :authored_comments, class_name: 'Comment', foreign_key: 'author_id', :dependent => :destroy
@@ -32,5 +32,22 @@ class User < ApplicationRecord
   has_many :friendships, foreign_key: 'friender_id', :dependent => :destroy
   has_many :friends, through: :friendships, source: :friendee
 
+  default_scope -> { order(name: :asc) }
+
+  def friends?(user)
+    self.friends.include?(user)
+  end
+
+  def received_request_pending?(user)
+    self.pending_frienders.include?(user)
+  end
+
+  def sent_request_pending?(user)
+    self.pending_friendees.include?(user)
+  end
+
+  def is?(user)
+    true if self==user
+  end
 
 end
